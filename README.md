@@ -1,0 +1,2 @@
+# Automated-Character-Identification-In-Multi-Cast-Cinematic-Universes
+This project develops a deep learning pipeline for closed-set character identification in raw, uncurated cinematic imagery automatically classifying five recurring characters from the Stranger Things universe using a transfer-learned ResNet-50 model trained exclusively on self-collected data, without reliance on any pre-labelled public dataset.
