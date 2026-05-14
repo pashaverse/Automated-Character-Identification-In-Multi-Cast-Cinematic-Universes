@@ -1,2 +1,6 @@
 mtcnn_filtered/ 
 *.py 
+mtcnn_filtered/ 
+raw_videos/ 
+*.mp4 
+*.py 
