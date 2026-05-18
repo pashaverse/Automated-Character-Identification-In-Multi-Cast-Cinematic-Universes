@@ -1,9 +1,3 @@
-"""
-Consolidate multi-season face dataset into a unified folder structure.
-Source: dataset/ (multiple seasons and sources)
-Output: finalised_dataset/ (unified by character)
-"""
-
 import os
 import shutil
 from pathlib import Path

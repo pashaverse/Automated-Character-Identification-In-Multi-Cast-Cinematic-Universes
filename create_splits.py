@@ -1,9 +1,3 @@
-"""
-Create stratified 70/15/15 train/val/test split from consolidated dataset.
-Source: finalised_dataset/{character}/
-Output: finalised_dataset/splits/{train,val,test}/{character}/
-"""
-
 import os
 import shutil
 from pathlib import Path
