@@ -246,8 +246,8 @@ def get_examples():
 # GRADIO INTERFACE
 examples = get_examples()
 
-with gr.Blocks(title="Stranger Things Character Identifier") as demo:
-    gr.Markdown("# 🎬 Stranger Things Character Identifier")
+with gr.Blocks(title="Automated-Character-Identification-In-Multi-Cast-Cinematic-Universes") as demo:
+    gr.Markdown("# Automated Character Identification In Multi-Cast Cinematic Universes")
     gr.Markdown(
         "Upload an image and detect which Stranger Things character appears in it using **MTCNN + ResNet-50**."
     )
