@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 from typing import List
 
@@ -13,9 +12,10 @@ from sklearn.metrics import (
     ConfusionMatrixDisplay,
     roc_curve,
     auc,
+    roc_auc_score,
 )
-from sklearn.metrics import roc_auc_score
 from sklearn.preprocessing import label_binarize
+import scipy.sparse
 import matplotlib.pyplot as plt
 
 from src.dataset import CharacterDataset
@@ -29,6 +29,9 @@ THETA = 0.7
 OUTPUT_DIR = Path("outputs")
 CLASS_NAMES = ["dustin", "eleven", "hopper", "lucas", "steve"]
 NUM_CLASSES = len(CLASS_NAMES)
+
+# Type aliases for clarity after numpy conversion
+NDArray = np.ndarray
 
 
 def ensure_output_dir():
@@ -62,9 +65,9 @@ def evaluate():
 
     loader = build_loader()
 
-    y_true_confident: List[int] = []
-    y_pred_confident: List[int] = []
-    y_score_confident: List[List[float]] = []
+    y_true_confident_list: List[int] = []
+    y_pred_confident_list: List[int] = []
+    y_score_confident_list: List[List[float]] = []
     uncertain_count = 0
     uncertain_entries: List[tuple] = []
 
@@ -88,15 +91,15 @@ def evaluate():
                     uncertain_entries.append((path, float(maxp), int(pred), int(true)))
                     continue
 
-                y_true_confident.append(true)
-                y_pred_confident.append(pred)
-                y_score_confident.append(p.tolist())
+                y_true_confident_list.append(true)
+                y_pred_confident_list.append(pred)
+                y_score_confident_list.append(p.tolist())
 
-    y_true_confident = np.array(y_true_confident)
-    y_pred_confident = np.array(y_pred_confident)
-    y_score_confident = np.array(y_score_confident)
+    y_true_confident = np.array(y_true_confident_list)
+    y_pred_confident = np.array(y_pred_confident_list)
+    y_score_confident = np.array(y_score_confident_list)
 
-    if y_true_confident.size == 0:
+    if len(y_true_confident) == 0:
         print("No confident predictions above threshold. Nothing to evaluate.")
         print(f"Uncertain count: {uncertain_count}")
         return
@@ -111,8 +114,9 @@ def evaluate():
     print(f"Top-1 Accuracy (confident only): {top1:.4f}")
     print(f"Macro F1-score: {macro_f1:.4f}")
     print("Per-class F1-score:")
-    for idx, score in enumerate(per_class_f1):
-        print(f"  {CLASS_NAMES[idx]:<7}: {score:.4f}")
+    per_class_f1_arr = np.atleast_1d(per_class_f1)
+    for idx in range(NUM_CLASSES):
+        print(f"  {CLASS_NAMES[idx]:<7}: {per_class_f1_arr[idx]:.4f}")
     print(f"Uncertain predictions (below {THETA}): {uncertain_count}")
 
     ensure_output_dir()
@@ -139,6 +143,8 @@ def evaluate():
 
     # ROC One-vs-Rest
     y_true_binarized = label_binarize(y_true_confident, classes=list(range(NUM_CLASSES)))
+    # Ensure dense array
+    y_true_binarized = np.asarray(y_true_binarized)
 
     fig, ax = plt.subplots(figsize=(8, 6))
     for i in range(NUM_CLASSES):
@@ -150,8 +156,8 @@ def evaluate():
         ax.plot(fpr, tpr, label=f"{CLASS_NAMES[i]} (AUC = {roc_auc:.2f})")
 
     ax.plot([0, 1], [0, 1], "k--", lw=0.8)
-    ax.set_xlim([0.0, 1.0])
-    ax.set_ylim([0.0, 1.05])
+    ax.set_xlim((0.0, 1.0))
+    ax.set_ylim((0.0, 1.05))
     ax.set_xlabel("False Positive Rate")
     ax.set_ylabel("True Positive Rate")
     # compute macro & micro AUC if possible
