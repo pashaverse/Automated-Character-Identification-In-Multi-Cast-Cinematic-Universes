@@ -1,0 +1,19 @@
+# Core ML stack
+torch
+torchvision
+
+# Face detection
+facenet-pytorch
+
+# Data processing and augmentations
+numpy
+pillow
+albumentations
+
+# Training / evaluation metrics and plots
+scikit-learn
+scipy
+matplotlib
+
+# Demo UI
+gradio
