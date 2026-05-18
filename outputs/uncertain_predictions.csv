@@ -1,0 +1,13 @@
+filepath,max_prob,predicted_label,true_label
+finalised_dataset\splits\test\dustin\dustin_S1_28.jpg,0.6359372138977051,3,0
+finalised_dataset\splits\test\dustin\dustin_S1_63.jpg,0.6409589052200317,0,0
+finalised_dataset\splits\test\dustin\dustin_S1_89.png,0.5068807601928711,0,0
+finalised_dataset\splits\test\dustin\dustin_S5_205.jpg,0.59532231092453,0,0
+finalised_dataset\splits\test\eleven\eleven_S2_131.jpg,0.6150944232940674,1,1
+finalised_dataset\splits\test\eleven\eleven_S2_132.jpg,0.6426715850830078,2,1
+finalised_dataset\splits\test\lucas\lucas_S1_17.jpg,0.5981523990631104,3,3
+finalised_dataset\splits\test\lucas\lucas_S4_189.jpg,0.6340814828872681,3,3
+finalised_dataset\splits\test\steve\steve_S2_101.jpg,0.5695203542709351,4,4
+finalised_dataset\splits\test\steve\steve_S2_87.jpg,0.6032686233520508,4,4
+finalised_dataset\splits\test\steve\steve_S5_198.jpg,0.667482852935791,4,4
+finalised_dataset\splits\test\steve\steve_S5_255.jpg,0.45999518036842346,0,4
