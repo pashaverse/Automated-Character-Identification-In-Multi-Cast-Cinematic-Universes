@@ -105,28 +105,9 @@ Demo features: image upload, adjustable confidence threshold (0.3–0.9), multi-
 - Sensitive to lighting and occlusion
 - Requires clean single-face crops for best performance
 
-**Future Directions:**
-- Per-face multi-character detection
-- Attention mechanisms for interpretability
-- Hard negative mining on failures
-- Synthetic data augmentation (lighting, occlusion)
-- Ensemble with other backbones (EfficientNet, ViT)
-- Real-time video processing
-
 ## References
 
 He et al. (2016) — Deep Residual Learning for Image Recognition (ResNet)  
 Zhang et al. (2016) — Joint Face Detection and Alignment using MTCNN  
 Albumentations Documentation — Fast Image Augmentation  
 PyTorch, facenet-pytorch, scikit-learn, Gradio documentation
-
-## License
-
-Academic project for Programming for AI course. Uses promotional/public domain Stranger Things material.
-
-**Contact:** M. Fahad Pasha, M. Ali, M. Hadi
-
----
-
-**Last Updated:** May 2026  
-**Status:** Ready for evaluation
